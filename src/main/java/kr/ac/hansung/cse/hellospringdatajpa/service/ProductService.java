@@ -17,7 +17,7 @@ public class ProductService {
     private ProductRepository repo;
 
     public Product get(long id) {
-        return repo.findById(id)
+        return repo.findById(id) //Optional
                 .orElseThrow(() -> new NoSuchElementException("Product not found with id: " + id));
     }
 

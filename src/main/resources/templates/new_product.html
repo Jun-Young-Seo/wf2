@@ -9,7 +9,9 @@
 <body>
 <div class="container">
     <h1 class="mt-5 text-center">Create New Product</h1>
+
     <br />
+<!--form이 제출될 때 Action이 products/save에 post-->
     <form th:action="@{/products/save}" th:object="${product}" method="post">
         <div class="row justify-content-center">
             <div class="col-md-6">
@@ -27,10 +29,14 @@
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Price:</label>
+                    <div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
                     <input type="text" id="price" class="form-control" th:field="*{price}" />
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                <div class="text-center">
+                   <a class="btn btn-warning btn-sm my-4" th:href="@{/home}">홈</a>
                 </div>
             </div>
         </div>

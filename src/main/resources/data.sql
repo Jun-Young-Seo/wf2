@@ -24,3 +24,16 @@ insert into product (name, brand, made_in, price) values ('sienna', 'Honda', 'Ja
 
 insert into product (name, brand, made_in, price) values ('Camry', 'Toyota', 'Japan',  25000);
 insert into product (name, brand, made_in, price) values ('Lexus', 'Toyota', 'Japan',  50000);
+
+-- 권한 정보 넣고 시작
+insert into role (role_name) values("ROLE_ADMIN");
+insert into role (role_name) values("ROLE_USER");
+
+-- Test용 계정 처음에 넣고 시작
+-- password는 123에 대한 해시 값(Bcrypt)
+insert into user(email,password) values("admin@naver.com", "$2a$10$csx666GPfanxKGKrACSaze5rt/IeUSIhjpvqgovRpAM.Bh2ZCJ7yW");
+insert into user(email,password) values("normal@naver.com", "$2a$10$csx666GPfanxKGKrACSaze5rt/IeUSIhjpvqgovRpAM.Bh2ZCJ7yW");
+
+-- DDL-auto = create니까 만들 떄 마다 초기화되므로 처음 계정 두개 강제 넣고 시작
+insert into user_role (user_id, role_id) values (1, 1);
+insert into user_role (user_id, role_id) values (2, 2);

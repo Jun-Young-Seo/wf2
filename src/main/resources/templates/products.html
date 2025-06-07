@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 
 <head th:insert="~{common :: commonHead}">
   <title>Product Manager</title>
@@ -9,7 +10,11 @@
 <body>
 <div class="container">
   <h1 class="mt-5">Product List</h1>
-  <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
+
+  <!-- Create New Product 버튼 - 관리자만 -->
+  <div sec:authorize="hasRole('ADMIN')">
+    <a class="btn btn-primary mb-3" th:href="@{/products/new}">Create New Product</a>
+  </div>
 
   <table class="table table-bordered">
     <thead>
@@ -29,15 +34,22 @@
       <td th:text="${product.brand}">Brand</td>
       <td th:text="${product.madeIn}">Made in</td>
       <td th:text="${product.price}">Price</td>
+
       <td>
-        <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
-        <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+        <!-- Edit/Delete 버튼 - 관리자만 -->
+        <div sec:authorize="hasRole('ADMIN')">
+          <a class="btn btn-primary btn-sm" th:href="@{'/products/edit/' + ${product.id}}">Edit</a>
+          <a class="btn btn-danger btn-sm" th:href="@{'/products/delete/' + ${product.id}}">Delete</a>
+        </div>
       </td>
+
     </tr>
     </tbody>
   </table>
 </div>
-
+<div class="text-center">
+  <a class="btn btn-warning btn-sm my-4" th:href="@{/home}">홈</a>
+</div>
 <!-- Bootstrap JS fragment 삽입 -->
 <div th:insert="~{common :: commonScript}"></div>
 </body>

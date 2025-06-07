@@ -28,4 +28,9 @@ public class Product {
         this.madeIn = madeIn;
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "id : "+id+" ,name : "+name+" , brand : "+brand+" , madeIn : "+madeIn+" , price : "+price;
+    }
 }

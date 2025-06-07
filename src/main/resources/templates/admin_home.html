@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Admin Page</title>
+</head>
+<body>
+
+<h2>관리자 페이지</h2>
+<p>Welcome Administrator (<span sec:authentication="principal.username">User</span>)</p>
+
+<div class="text-center">
+    <a class="btn btn-warning btn-sm my-4" th:href="@{/home}">홈</a>
+</div>
+
+<h3>전체 사용자 목록</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>이메일</th>
+        <th>권한</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.email}"></td>
+        <td>
+            <ul>
+                <li th:each="role : ${user.roles}" th:text="${role.roleName}"></li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="LogOut"/>
+</form>
+
+</body>
+</html>
